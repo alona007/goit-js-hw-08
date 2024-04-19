@@ -65,7 +65,7 @@ const images = [
   
 ];
 
-const galleryEl = document.querySelector("ul.gallery");
+const galleryElement = document.querySelector("ul.gallery");
 
 const galleryMarkup = images.map((image) => {
   const listItem = document.createElement("li");
@@ -88,13 +88,13 @@ const galleryMarkup = images.map((image) => {
 });
 
 galleryMarkup.forEach((item) => {
-  galleryEl.appendChild(item);
+  galleryElement.appendChild(item);
 });
 
-galleryEl.addEventListener("click", (event) => {
+galleryElement.addEventListener("click", (event) => {
   event.preventDefault();
-  
-   if (event.target.classList.contains("gallery-image")) {
+
+  if (event.target.classList.contains("gallery-image")) {
     const bigImgUrl = event.target.dataset.source;
 
     basicLightbox.create(`<img width="1400" height="900" src="${bigImgUrl}">`).show();
