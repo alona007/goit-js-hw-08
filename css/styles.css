@@ -2,23 +2,12 @@
 *::before,
 *::after {
   box-sizing: border-box;
-}
-
-body {
   margin: 0;
   padding: 0;
 }
 
 a {
   text-decoration: none;
-}
-
-h1,
-h2,
-h3,
-p,
-ul {
-  margin: 0;
 }
 
 ul {
