@@ -65,6 +65,8 @@ const images = [
   
 ];
 
+const galleryElement = document.querySelector("ul.gallery");
+
 const galleryMarkup = images.map(({ preview, original, description }) => {
   const listItem = document.createElement("li");
   listItem.classList.add("gallery-item");
