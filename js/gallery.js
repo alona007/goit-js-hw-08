@@ -65,41 +65,30 @@ const images = [
 ];
 
 const galleryElement = document.querySelector("ul.gallery");
-const fragment = document.createDocumentFragment(); 
 
-const createGalleryItem = ({ preview, original, description }) => {
-  const listItem = document.createElement("li");
-  listItem.classList.add("gallery-item");
+const galleryMarkup = images.map(
+    ({ preview, original, description }) => `<li class="gallery-item">
+  <a class="gallery-link" href="${original}">
+    <img
+      class="gallery-image"
+      src="${preview}"
+      data-source="${original}"
+      alt="${description}"
+    />
+  </a>
+</li>\n`
+  )
+  .join("");
 
-  const link = document.createElement("a");
-  link.classList.add("gallery-link");
-  link.href = original;
-
-  const img = document.createElement("img");
-  img.classList.add("gallery-image");
-  img.src = preview;
-  img.dataset.source = original;
-  img.alt = description;
-
-  link.appendChild(img);
-  listItem.appendChild(link);
-
-  return listItem;
-};
-
-const galleryMarkup = images.map(createGalleryItem);
-
-galleryMarkup.forEach((item) => {
-  fragment.appendChild(item); 
-});
-
-galleryElement.appendChild(fragment); 
+galleryElement.insertAdjacentHTML("afterbegin", galleryMarkup);
 
 galleryElement.addEventListener("click", (event) => {
-  event.preventDefault();
+  if (event.target !== event.currentTarget) {
+    event.preventDefault();
+    const bigImgUrl = event.target.dataset.source;
 
-  if (event.target.classList.contains("gallery-image")) {
-    const { source } = event.target.dataset;
-    basicLightbox.create(`<img width="1400" height="900" src="${source}">`).show();
+    basicLightbox
+      .create(`<img width="1400" height="900" src="${bigImgUrl}">`)
+      .show();
   }
 });
